@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exit Codes &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Git Hooks" href="coala_as_Git_Hook.html" />
+    <link rel="prev" title="Glob - Extended unix style pathname expansion" href="Glob_Patterns.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="exit-codes">
+<h1>Exit Codes<a class="headerlink" href="#exit-codes" title="Permalink to this headline">¶</a></h1>
+<p>The following is a list of coala&#8217;s exit codes and their meanings:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">0</span></code> - coala executed successfully but yielded no results.</li>
+<li><code class="docutils literal"><span class="pre">1</span></code> - coala executed successfully but yielded results.</li>
+<li><code class="docutils literal"><span class="pre">2</span></code> - Invalid arguments were passed to coala in the command line.</li>
+<li><code class="docutils literal"><span class="pre">3</span></code> - The file collector exits with this code if an invalid pattern
+is passed to it.</li>
+<li><code class="docutils literal"><span class="pre">4</span></code> - coala was executed with an unsupported version of python</li>
+<li><code class="docutils literal"><span class="pre">5</span></code> - coala executed successfully. Results were found but patches
+to the results were applied successfully</li>
+<li><code class="docutils literal"><span class="pre">13</span></code> - There is a conflict in the version of a dependency you have
+installed and the requirements of coala.</li>
+<li><code class="docutils literal"><span class="pre">130</span></code> - A <code class="docutils literal"><span class="pre">KeyboardInterrupt</span></code> (<code class="docutils literal"><span class="pre">Ctrl+C</span></code>) was pressed during the
+execution of coala.</li>
+<li><code class="docutils literal"><span class="pre">255</span></code> - Any other general errors.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Glob_Patterns.html" title="previous chapter">Glob - Extended unix style pathname expansion</a></li>
+      <li>Next: <a href="coala_as_Git_Hook.html" title="next chapter">Git Hooks</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/Exit_Codes.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

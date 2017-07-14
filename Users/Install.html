@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing coala Natively &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Getting Started with coala" href="Tutorial.html" />
+    <link rel="prev" title="Welcome to the coala documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installing-coala-natively">
+<h1>Installing coala Natively<a class="headerlink" href="#installing-coala-natively" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have a working docker and you do not want to work with python,
+go to the bottom on the docker setup.</p>
+</div>
+<p>This page will run you through the installation of coala without docker. coala
+currently supports Linux, Windows and OS X.</p>
+<div class="section" id="installing-python-and-pip">
+<h2>Installing Python and Pip<a class="headerlink" href="#installing-python-and-pip" title="Permalink to this headline">¶</a></h2>
+<p>In order to use coala, you need Python installed. In order to do so, you should
+install Python &gt;= 3.4 from <a class="reference external" href="https://www.python.org/downloads/">here</a>.</p>
+<p>The easiest way to install coala is using pip (Pip Installs Packages).
+If you don&#8217;t already have pip, you can install it like described in the
+<a class="reference external" href="https://pip.pypa.io/en/stable/installing.html">pip installation guide</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pip is shipped with recent Python versions by default.</p>
+</div>
+<p>To check whether you have pip installed, type the following command which will
+also show you more information about your current pip version:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip show pip
+</pre></div>
+</div>
+<p>Make sure you have pip &gt;= 8 installed as older versions might prevent coala
+from being installed properly.</p>
+</div>
+<div class="section" id="installing-coala">
+<h2>Installing coala<a class="headerlink" href="#installing-coala" title="Permalink to this headline">¶</a></h2>
+<p>There are three ways of installing coala. By using a virtualenv, by installing
+it system-wide or directly from source.</p>
+<p>After successfully installing coala, you will need to install all the
+dependencies the bears have.</p>
+<div class="section" id="system-wide-installation">
+<h3>System Wide Installation<a class="headerlink" href="#system-wide-installation" title="Permalink to this headline">¶</a></h3>
+<p>The simplest way to install coala is to do it system-wide, but this is
+generally discouraged in favor of using a virtualenv.</p>
+<p>To install the latest most stable version of coala and supported bears
+system-wide, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install coala-bears
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For this and all future steps, some steps require root access
+(also known as administrative privileges in Windows).</p>
+<p><strong>Unix based</strong> (OS X, Linux) - This can be achieved by using <code class="docutils literal"><span class="pre">sudo</span></code>
+in front of the command, as in: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">command_name</span></code> instead of
+<code class="docutils literal"><span class="pre">command_name</span></code></p>
+<p class="last"><strong>Windows</strong> - The easiest way on Windows is to start a
+command prompt as an administrator and start <code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+</div>
+<p>To install the nightly build from our master branch, you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install coala-bears --pre
+</pre></div>
+</div>
+<p>To install coala only (without any bears), you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install coala
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Ubuntu Users</strong> - Do not use <code class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">coala</span></code>
+for installing coala as that is different software.</p>
+</div>
+</div>
+<div class="section" id="installing-inside-a-virtualenv">
+<h3>Installing inside a virtualenv<a class="headerlink" href="#installing-inside-a-virtualenv" title="Permalink to this headline">¶</a></h3>
+<p>Virtualenv is probably what you want to use during development.
+You can read more about
+it at the <a class="reference external" href="http://virtualenv.readthedocs.org">virtualenv documentation</a>.</p>
+<p>First, we need to install virtualenv to the system. You may already have this
+installed as <code class="docutils literal"><span class="pre">virtualenv</span></code> or <code class="docutils literal"><span class="pre">pyvenv</span></code>. If you do not, this can be done
+with <code class="docutils literal"><span class="pre">pip3</span></code> easily:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install virtualenv
+</pre></div>
+</div>
+<p>Once you have virtualenv installed, just fire up a shell and create
+your own environment. I usually create a project folder and a <code class="docutils literal"><span class="pre">venv</span></code>
+folder:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virtualenv venv
+</pre></div>
+</div>
+<p>Now, whenever you want to work on the project, you only have to activate
+the corresponding environment.</p>
+<blockquote>
+<div><p>On <strong>Unix based</strong> systems (OS X and Linux), this can be done with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ source venv/bin/activate
+</pre></div>
+</div>
+<p>And on <strong>Windows</strong> this is done with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ venv\scripts\activate
+</pre></div>
+</div>
+</div></blockquote>
+<p>Finally, you should install coala and the supported bears inside the activated
+virtualenv with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(venv)$ pip3 install coala-bears
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-coala-with-docker">
+<h1>Using coala With Docker<a class="headerlink" href="#using-coala-with-docker" title="Permalink to this headline">¶</a></h1>
+<p>Use this installation method if you <em>just simply want to use coala</em>.</p>
+<p>The recommended way to use coala is using docker: coala has a lot of
+dependencies because it has so much code analysis for so many languages. If you
+use our docker image, you can run it like any other tool but you do not need to
+care about those! The general command to run coala is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker run -ti -v $(pwd):/app --workdir=/app coala/base coala --version
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This will automatically download the docker image with all the coala
+dependencies for you. The image may take up a bit over 2GB of space on your
+disk. Check out the native installation if this is not for you.</p>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>If you use Windows, you can install docker easily using
+<a class="reference external" href="https://www.docker.com/products/docker-toolbox">Docker Toolbox</a>.</p>
+<div class="section" id="bleeding-edge-installation">
+<h3>Bleeding edge installation<a class="headerlink" href="#bleeding-edge-installation" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to develop coala, you should check out our
+<a class="reference external" href="http://coala.io/newcomer">Newcomer Tutorial</a> and
+<a class="reference internal" href="../Help/Getting_In_Touch.html"><span class="doc">get in touch with us</span></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install coala-bears --pre
+</pre></div>
+</div>
+<p>Also check out the <a class="reference external" href="http://coala.io/devsetup">Developers Setup</a> docs.</p>
+</div>
+<div class="section" id="alternate-location-installation">
+<h3>Alternate location installation<a class="headerlink" href="#alternate-location-installation" title="Permalink to this headline">¶</a></h3>
+<p>If you want to install coala to an alternate location, you can e.g. call
+<code class="docutils literal"><span class="pre">python3</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--prefix=/your/prefix/location</span></code>. Other installation
+options are documented in the
+<a class="reference external" href="https://docs.python.org/3.4/install/#alternate-installation">Python docs</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you are using a proxy, follow these steps:</p>
+<ul class="simple">
+<li>Set up your system-wide proxy.</li>
+<li>Use <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">-E</span> <span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">coala</span></code> (the <code class="docutils literal"><span class="pre">-E</span></code> flag takes the
+existing environment variables into the <code class="docutils literal"><span class="pre">sudo</span></code> environment).</li>
+</ul>
+<p class="last">You could also set your pip.conf file to use a proxy. To find out more,
+read <a class="reference external" href="http://stackoverflow.com/questions/14149422/using-pip-behind-a-proxy">Using pip behind a proxy on StackOverflow</a>
+for further clarification.</p>
+</div>
+</div>
+</div>
+<div class="section" id="optional-dependencies">
+<h2>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Those dependencies are not mandatory. You may install all of the
+dependencies if you want to install all the bears. The bear
+application also asks for the packages needed in case it does not
+have it.</p>
+<p>The requirements files ( Gemfile, requirements.txt, etc.) are in
+the coala-bears repository and you should not get them from
+source, but you should git clone the repository if you want to
+execute those commands.</p>
+<p>This section lists dependencies of coala that are not automatically
+installed. On Windows, you can get many with <code class="docutils literal"><span class="pre">nuget</span></code>
+(<a class="reference external" href="https://www.nuget.org/">https://www.nuget.org/</a>). On Mac, Homebrew will help you installing
+dependencies (<a class="reference external" href="http://brew.sh/">http://brew.sh/</a>). These dependencies require you to have
+<a class="reference external" href="https://github.com/coala/coala-bears">the repository</a>
+cloned locally.</p>
+<div class="section" id="js-dependencies">
+<h3>JS Dependencies<a class="headerlink" href="#js-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>coala features a lot of bears that use linters written in JavaScript. In
+order for them to be usable, you need to install them via <code class="docutils literal"><span class="pre">npm</span></code>
+(<a class="reference external" href="http://nodejs.org/">http://nodejs.org/</a>), while in the project directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ npm install -g
+</pre></div>
+</div>
+<p>If a bear still doesn&#8217;t work for you, please make sure that you have a
+recent version of <code class="docutils literal"><span class="pre">npm</span></code> installed. Many linux distributions ship a
+very old one.</p>
+</div>
+<div class="section" id="ruby-dependencies">
+<h3>Ruby Dependencies<a class="headerlink" href="#ruby-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>There are also a few bears which rely on Ruby Gems. In order to install them,
+you will need <code class="docutils literal"><span class="pre">Gem</span></code> (<a class="reference external" href="https://rubygems.org/pages/download/">https://rubygems.org/pages/download/</a>) installed
+and <code class="docutils literal"><span class="pre">bundler</span></code>.</p>
+<p>To grab <code class="docutils literal"><span class="pre">bundler</span></code>, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gem install bundler
+</pre></div>
+</div>
+<p>Then, simply run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ bundle install
+$ git add Gemfile Gemfile.lock
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-dependencies">
+<h3>Binary Dependencies<a class="headerlink" href="#binary-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Some bears need some binary dependencies. Some of those include:</p>
+<ul class="simple">
+<li>PHPLintBear: Install <code class="docutils literal"><span class="pre">php</span></code></li>
+<li>GNUIndentBear: Install <code class="docutils literal"><span class="pre">indent</span></code> (be sure to use GNU Indent, Mac ships
+a non-GNU version that lacks some functionality.)</li>
+<li>CSharpLintBear: Install <code class="docutils literal"><span class="pre">mono-mcs</span></code></li>
+</ul>
+<p>For further help with installing bears with binary dependencies, don&#8217;t hesitate
+to
+<a class="reference internal" href="../Help/Getting_In_Touch.html"><span class="doc">get in touch with us</span></a>.</p>
+</div>
+<div class="section" id="clang">
+<h3>Clang<a class="headerlink" href="#clang" title="Permalink to this headline">¶</a></h3>
+<p>coala features some bears that make use of Clang. In order for them to
+work, you need to install <code class="docutils literal"><span class="pre">libclang</span></code>:</p>
+<ul class="simple">
+<li>Ubuntu: <code class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libclang1</span></code></li>
+<li>Fedora: <code class="docutils literal"><span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">clang-libs</span></code> (Use <code class="docutils literal"><span class="pre">yum</span></code> instead of <code class="docutils literal"><span class="pre">dnf</span></code> on
+Fedora 21 or lower.)</li>
+<li>ArchLinux: <code class="docutils literal"><span class="pre">pacman</span> <span class="pre">-Sy</span> <span class="pre">clang</span></code></li>
+<li>Windows: <code class="docutils literal"><span class="pre">nuget</span> <span class="pre">install</span> <span class="pre">ClangSharp</span></code></li>
+<li>OS X: <code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">llvm</span> <span class="pre">--with-clang</span></code></li>
+</ul>
+<p>If these do not help you, search for a package that contains
+<code class="docutils literal"><span class="pre">libclang.so</span></code>.</p>
+<p>On Windows, you need to execute this command to add the libclang path to
+the <em>PATH</em> variable permanently (you need to be an administrator):</p>
+<p><code class="docutils literal"><span class="pre">setx</span> <span class="pre">PATH</span> <span class="pre">&quot;%PATH%;%cd%\ClangSharp.XXX\content\x86&quot;</span> <span class="pre">\M</span></code></p>
+<p>For x86 python or for x64 python:</p>
+<p><code class="docutils literal"><span class="pre">setx</span> <span class="pre">PATH</span> <span class="pre">&quot;%PATH%;%cd%\ClangSharp.XXX\content\x64&quot;</span> <span class="pre">\M</span></code></p>
+<p>Replace &#8220;XXX&#8221; with the ClangSharp version you received from nuget.</p>
+</div>
+</div>
+<div class="section" id="shell-autocompletion-support">
+<h2>Shell-Autocompletion Support<a class="headerlink" href="#shell-autocompletion-support" title="Permalink to this headline">¶</a></h2>
+<p>If you are a bash/zsh user , checkout the
+<a class="reference external" href="https://docs.coala.io/en/latest/Users/Shell_Autocompletion.html">guide</a>
+to set up autocompletion for coala arguments and bear names.</p>
+</div>
+<div class="section" id="installation-errors">
+<h2>Installation Errors<a class="headerlink" href="#installation-errors" title="Permalink to this headline">¶</a></h2>
+<p>In case you are getting
+<code class="docutils literal"><span class="pre">ValueError:('Expected</span> <span class="pre">version</span> <span class="pre">spec</span> <span class="pre">in',</span> <span class="pre">'appdirs</span> <span class="pre">~=1.4.0',</span> <span class="pre">'at',</span>
+<span class="pre">'</span> <span class="pre">~=1.4.0')</span></code>, then don&#8217;t panic. It happens when you are using an outdated
+version of pip that doesn&#8217;t support our <a class="reference external" href="https://www.python.org/dev/peps/pep-0440/#version-specifiers">version specifiers</a> yet.</p>
+<blockquote>
+<div><p>Ideally, you have to create a virtual environment with a newer pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install virtualenv
+$ virtualenv -p python3 ~/venv/coala
+$ . ~/venv/coala/bin/activate
+$ pip install -U pip
+$ pip install coala-bears
+</pre></div>
+</div>
+</div></blockquote>
+<p>You have to activate this virtualenv on every terminal session you want to use
+coala though (tip: add it to bashrc!).</p>
+<div class="section" id="generating-documentation">
+<h3>Generating Documentation<a class="headerlink" href="#generating-documentation" title="Permalink to this headline">¶</a></h3>
+<p>coala documentation is
+<a class="reference external" href="https://github.com/coala/documentation">in a separate repository</a>.
+First you need to install the requirements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install -r docs-requirements.txt
+</pre></div>
+</div>
+<p>To generate the documentation coala uses <cite>sphinx</cite>. Documentation can be
+generated by running the following command while in root directory of the
+repository:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ make html
+</pre></div>
+</div>
+<p>You can then open <code class="docutils literal"><span class="pre">_build\html\index.html</span></code> in your favourite
+browser.</p>
+<p>See <a class="reference external" href="http://api.coala.io/en/latest/Developers/Writing_Documentation.html">Writing Documentation</a>
+for more information.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing coala Natively</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-python-and-pip">Installing Python and Pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-coala">Installing coala</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-wide-installation">System Wide Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-inside-a-virtualenv">Installing inside a virtualenv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#using-coala-with-docker">Using coala With Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bleeding-edge-installation">Bleeding edge installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternate-location-installation">Alternate location installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#js-dependencies">JS Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ruby-dependencies">Ruby Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binary-dependencies">Binary Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clang">Clang</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-autocompletion-support">Shell-Autocompletion Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-errors">Installation Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generating-documentation">Generating Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to the coala documentation!</a></li>
+      <li>Next: <a href="Tutorial.html" title="next chapter">Getting Started with coala</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/Install.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

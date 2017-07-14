@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Glob - Extended unix style pathname expansion &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Exit Codes" href="Exit_Codes.html" />
+    <link rel="prev" title="Writing a coala Configuration File (coafile and coarc)" href="coafile.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="glob-extended-unix-style-pathname-expansion">
+<h1>Glob - Extended unix style pathname expansion<a class="headerlink" href="#glob-extended-unix-style-pathname-expansion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-glob-patterns">
+<h2>Using Glob Patterns<a class="headerlink" href="#using-glob-patterns" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you want <code class="docutils literal"><span class="pre">SpaceConsistencyBear</span></code> to perform an analysis on a file
+<code class="docutils literal"><span class="pre">first.c</span></code>, you should use the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coala</span> <span class="o">--</span><span class="n">files</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">first</span><span class="o">.</span><span class="n">c</span> <span class="o">--</span><span class="n">bears</span><span class="o">=</span><span class="n">SpaceConsistencyBear</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t know the functions of a bear or how to perform the analysis
+with a bear, you should go through <a class="reference external" href="http://coala.readthedocs.io/en/latest/Users/Tutorial.html">Tutorial</a> first.</p>
+</div>
+<p>Now, if you want all the <code class="docutils literal"><span class="pre">.c</span></code> files in a specific directory to be analysed,
+you can take help of glob patterns.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coala</span> <span class="o">--</span><span class="n">files</span><span class="o">=</span><span class="s1">&#39;src/*.c&#39;</span> <span class="o">--</span><span class="n">bears</span><span class="o">=</span><span class="n">SpaceConsistencyBear</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">*.c</span></code> matches all <code class="docutils literal"><span class="pre">.c</span></code> files in the <code class="docutils literal"><span class="pre">src</span></code> directory.
+Going further, if you want all <code class="docutils literal"><span class="pre">.c</span></code> as well as <code class="docutils literal"><span class="pre">.java</span></code> files to
+be analysed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coala</span> <span class="o">--</span><span class="n">files</span><span class="o">=</span><span class="s1">&#39;src/*.(java|c)&#39;</span> <span class="o">--</span><span class="n">bears</span><span class="o">=</span><span class="n">SpaceConsistencyBear</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+</div>
+<p>If you want your <code class="docutils literal"><span class="pre">files</span></code> argument to match all directories and
+subdirectories, you can use <code class="docutils literal"><span class="pre">**</span></code> glob pattern for that.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="o">**/*.</span><span class="n">c</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While using <code class="docutils literal"><span class="pre">files</span> <span class="pre">=</span> <span class="pre">**/*.c</span></code>, since we have used <code class="docutils literal"><span class="pre">/</span></code> in the glob
+pattern, all <code class="docutils literal"><span class="pre">.c</span></code> files at least one subdirectory below the root
+directory will be matched.</p>
+</div>
+<p>In coala, files and directories are specified by file name. To allow
+input of multiple files without requiring a large number of filenames,
+coala supports a number of wildcards. These are based on the unix-style
+glob syntax and they are <em>not</em> the same as regular expressions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any glob that does not start with a <code class="docutils literal"><span class="pre">/</span></code> in Linux or a drive letter
+<code class="docutils literal"><span class="pre">X:</span></code> in Windows will be interpreted as a relative path. Please use comma
+separated values instead of absolute path globs that start with a
+glob expression.</p>
+</div>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The special characters used in shell-style wildcards are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">PATTERN</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">[seq]</span></code></td>
+<td>Matches any character in seq. Cannot be empty. Any
+special character loses its special meaning in a set.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">[!seq]</span></code></td>
+<td>Matches any character not in seq. Cannot be empty. Any
+special character loses its special meaning in a set.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">(seq_a|seq_b)</span></code></td>
+<td>Matches either sequence_a or sequence_b as a whole. More
+than two or just one sequence can be given.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">?</span></code></td>
+<td>Matches any single character.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">*</span></code></td>
+<td>Matches everything but the directory separator.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">**</span></code></td>
+<td>Matches everything.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you&#8217;re looking for a negation pattern to exclude paths, check out the
+<code class="docutils literal"><span class="pre">--ignore</span></code> argument or <code class="docutils literal"><span class="pre">ignore</span></code> .coafile option <a class="reference external" href="http://coala.readthedocs.io/en/latest/Users/Tutorial.html#ignoring-issues">here</a>.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="seq">
+<h3><code class="docutils literal"><span class="pre">[seq]</span></code><a class="headerlink" href="#seq" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches any character in seq. Cannot be empty. Any special character
+loses its special meaning in a set.</div></blockquote>
+<p>Opening and closing brackets can be part of a set, although closing
+brackets have to be placed at the first position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">coalib.parsing.Globbing</span> <span class="k">import</span> <span class="n">fnmatch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[abc]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[bcd]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[a]]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aa]a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[a]]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[]abc]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[[a]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a[a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[[a]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a]a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[]]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a[]a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3><code class="docutils literal"><span class="pre">[!seq]</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches any character not in seq. Cannot be empty. Any special
+character loses its special meaning in a set.</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[!a]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[!b]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;a[b!b]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a!a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[b!b]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a!a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[!]a&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a[!]a&quot;</span><span class="p">,</span> <span class="s2">&quot;a[!]a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="seq-a-seq-b">
+<h3><code class="docutils literal"><span class="pre">(seq\_a\|seq\_b)</span></code><a class="headerlink" href="#seq-a-seq-b" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches either sequence_a or sequence_b as a whole. More than two
+or just one sequence can be given.</div></blockquote>
+<p>Parentheses cannot be part of an alternative, unless they are escaped by
+brackets. Parentheses that have no match are ignored as well as
+<code class="docutils literal"><span class="pre">|</span></code>-separators that are not inside matching parentheses.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aXb&quot;</span><span class="p">,</span> <span class="s2">&quot;a(X|Y)b&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aYb&quot;</span><span class="p">,</span> <span class="s2">&quot;a(X|Y)b&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aZb&quot;</span><span class="p">,</span> <span class="s2">&quot;a(X|Y)b&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aXb&quot;</span><span class="p">,</span> <span class="s2">&quot;(a(X|Y)b|c)&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a|b&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a|b&quot;</span><span class="p">,</span> <span class="s2">&quot;a|b&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;(aa&quot;</span><span class="p">,</span> <span class="s2">&quot;(a(a|b)&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a(a&quot;</span><span class="p">,</span> <span class="s2">&quot;(a(a|b)&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a(a&quot;</span><span class="p">,</span> <span class="s2">&quot;(a[(]a|b)&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;aa&quot;</span><span class="p">,</span> <span class="s2">&quot;a()a&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;(abc|)&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><code class="docutils literal"><span class="pre">?</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches any single character.</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;abbc&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a/c&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a</span><span class="se">\\</span><span class="s2">c&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a?c&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;ac&quot;</span><span class="p">,</span> <span class="s2">&quot;a?c&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><code class="docutils literal"><span class="pre">*</span></code><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches everything but the directory separator.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The directory separator is platform specific. <code class="docutils literal"><span class="pre">/</span></code> is never
+matched by <code class="docutils literal"><span class="pre">\*</span></code>. <code class="docutils literal"><span class="pre">\\</span></code> is matched on Linux, but not on Windows.</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;abbc&quot;</span><span class="p">,</span> <span class="s2">&quot;a*c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a/c&quot;</span><span class="p">,</span> <span class="s2">&quot;a*c&quot;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;ac&quot;</span><span class="p">,</span> <span class="s2">&quot;a*c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><code class="docutils literal"><span class="pre">**</span></code><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Matches everything.</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;abbc&quot;</span><span class="p">,</span> <span class="s2">&quot;a**c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fnmatch</span><span class="p">(</span><span class="s2">&quot;a/c&quot;</span><span class="p">,</span> <span class="s2">&quot;a**c&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Glob Patterns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-glob-patterns">Using Glob Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#seq"><code class="docutils literal"><span class="pre">[seq]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal"><span class="pre">[!seq]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seq-a-seq-b"><code class="docutils literal"><span class="pre">(seq\_a\|seq\_b)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal"><span class="pre">?</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><code class="docutils literal"><span class="pre">*</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="docutils literal"><span class="pre">**</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="coafile.html" title="previous chapter">Writing a coala Configuration File (coafile and coarc)</a></li>
+      <li>Next: <a href="Exit_Codes.html" title="next chapter">Exit Codes</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/Glob_Patterns.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

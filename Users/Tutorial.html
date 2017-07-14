@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started with coala &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Writing a coala Configuration File (coafile and coarc)" href="coafile.html" />
+    <link rel="prev" title="Installing coala Natively" href="Install.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started-with-coala">
+<h1>Getting Started with coala<a class="headerlink" href="#getting-started-with-coala" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to this little tutorial. It is meant to be a gentle introduction
+to the usage of coala.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>In order to complete this tutorial you will need coala installed.
+Installation instructions can be found <a class="reference external" href="https://coala.io/install">here</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Here&#8217;s a list of our
+<a class="reference external" href="https://github.com/coala/bear-docs/blob/master/README.rst">supported languages</a>.</p>
+</div>
+</div>
+<div class="section" id="get-some-code">
+<h2>Get Some Code<a class="headerlink" href="#get-some-code" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform a static code analysis on your code you will need
+some code to check. If you do not have your own code you want to check, you
+can retrieve our tutorial samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">coala</span><span class="o">/</span><span class="n">coala</span><span class="o">-</span><span class="n">tutorial</span>
+</pre></div>
+</div>
+<p>Please note that the commands given in this tutorial are intended for
+use with this sample code and may need minor adjustments.</p>
+</div>
+<div class="section" id="let-s-start">
+<h2>Let&#8217;s Start!<a class="headerlink" href="#let-s-start" title="Permalink to this headline">¶</a></h2>
+<p>There are two options how to let coala know what kind of analysis it
+should perform on which code.</p>
+<div class="section" id="command-line-interface">
+<h3>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h3>
+<p>In order to specify the files to analyze, you can use the <code class="docutils literal"><span class="pre">--files</span></code>
+argument of coala like demonstrated below. For all file paths, you can
+specify (recursive) <a class="reference external" href="../Users/Glob_Patterns.html">globs</a>.</p>
+<p>Because analysis routines can do many various things we named them
+<strong>bears</strong>. A bear can check your code for potential problems, calculate metrics
+and even provide corrections for your code.</p>
+<p>You can specify the bears that you want coala to run using the <code class="docutils literal"><span class="pre">--bears</span></code>
+argument:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">coala</span><span class="o">-</span><span class="n">tutorial</span>
+<span class="n">coala</span> <span class="o">--</span><span class="n">files</span><span class="o">=</span><span class="n">src</span><span class="o">/</span>\<span class="o">*.</span><span class="n">c</span> <span class="o">--</span><span class="n">bears</span><span class="o">=</span><span class="n">SpaceConsistencyBear</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can use comma separated values to specify more than one item in
+arguments! Do not use spaces as that would start a new argument.
+Example: <code class="docutils literal"><span class="pre">SpaceConsistencyBear,PEP8Bear</span></code></p>
+</div>
+<p>coala will now ask you for missing values that are needed to perform the
+analysis, which in this case is only the <code class="docutils literal"><span class="pre">use_spaces</span></code> setting. We
+recommend setting it to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+<p>coala will now check the code and, in case you use the tutorial code,
+yield one result. SpaceConsistencyBear will detect a trailing whitespace at
+the end of the line, after <code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;stdio.h&gt;</span></code> in the <code class="docutils literal"><span class="pre">main.c</span></code> file. coala
+will then ask you to remove the trailing space, by applying the suggested
+patch (option 2).</p>
+<p>You can also run coala in non interactive mode (given that all the settings
+required by the bears you are using are provided in the <code class="docutils literal"><span class="pre">.coafile</span></code>)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coala</span>  <span class="o">--</span><span class="n">non</span><span class="o">-</span><span class="n">interactive</span>
+</pre></div>
+</div>
+<p>In this case there won&#8217;t be any interaction, the patch will be shown directly.</p>
+<p>Feel free to experiment a bit. You&#8217;ve successfully analysed some code!
+But don&#8217;t stop reading - you don&#8217;t have to enter all those values again!
+We have given coala the <code class="docutils literal"><span class="pre">--save</span></code> argument, which means that it will
+automatically generate a <code class="docutils literal"><span class="pre">.coafile</span></code> into the current directory. Read on!</p>
+</div>
+<div class="section" id="configuration-files-coafiles">
+<h3>Configuration Files - coafiles<a class="headerlink" href="#configuration-files-coafiles" title="Permalink to this headline">¶</a></h3>
+<p>coala supports a very simple configuration file. If you&#8217;ve executed the
+instructions from the CLI section above, coala will already have such a
+file readily prepared for you. Go, take a look at it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">.</span><span class="n">coafile</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using Windows, you should use <code class="docutils literal"><span class="pre">type</span> <span class="pre">.coafile</span></code> instead!</p>
+</div>
+<p>This should yield something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Default</span><span class="p">]</span>
+<span class="n">bears</span> <span class="o">=</span> <span class="n">SpaceConsistencyBear</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">src</span><span class="o">/*.</span><span class="n">c</span>
+<span class="n">use_spaces</span> <span class="o">=</span> <span class="n">yeah</span>
+</pre></div>
+</div>
+<p>If you now invoke <code class="docutils literal"><span class="pre">coala</span></code> it will parse this <code class="docutils literal"><span class="pre">.coafile</span></code> from your
+current directory. This makes it easy to specify once for your project
+what is checked with which bears and make it available to all
+contributors.</p>
+<p>Feel free to play around with this file. You can either edit it manually
+or add/edit settings via <code class="docutils literal"><span class="pre">coala</span> <span class="pre">--save</span> <span class="pre">...</span></code> invocations. If you want
+coala to save settings every time, you can add <code class="docutils literal"><span class="pre">save</span> <span class="pre">=</span> <span class="pre">True</span></code> manually
+into your <code class="docutils literal"><span class="pre">.coafile</span></code>.</p>
+</div>
+</div>
+<div class="section" id="sections">
+<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
+<p>Thats all nice and well but we also have a Makefile for our project we
+want to check. So let us introduce another feature of our configuration
+syntax: <em>sections</em>.</p>
+<p>The line <code class="docutils literal"><span class="pre">[Default]</span></code> specifies that everything below will belong to
+the Default section. If nothing is specified, a setting will implicitly
+belong to this section.</p>
+<p>Let&#8217;s check the line lengths of our Makefile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coala</span> <span class="o">-</span><span class="n">S</span> <span class="n">Makefiles</span><span class="o">.</span><span class="n">bears</span><span class="o">=</span><span class="n">LineLengthBear</span> <span class="n">Makefiles</span><span class="o">.</span><span class="n">files</span><span class="o">=</span><span class="n">Makefile</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+</div>
+<p>As you can see, the <code class="docutils literal"><span class="pre">-S</span></code> (or <code class="docutils literal"><span class="pre">--settings</span></code>) option allows to specify
+arbitrary settings. Settings can be directly stored into a section with
+the <code class="docutils literal"><span class="pre">section.setting</span></code> syntax.</p>
+<p>By default, the <code class="docutils literal"><span class="pre">LineLengthBear</span></code> checks whether each line contains
+<code class="docutils literal"><span class="pre">79</span></code> chars or less in a line. To change this value, use the
+<code class="docutils literal"><span class="pre">max_line_length</span></code> inside the <code class="docutils literal"><span class="pre">.coafile</span></code>.</p>
+<p>coala will now yield any result you didn&#8217;t correct last time, plus a new
+one for the Makefile. This time coala (or better, the
+<code class="docutils literal"><span class="pre">LineLengthBear</span></code>) doesn&#8217;t know how to fix the issue but still tries to
+provide as much helpful information as possible and provides you the
+option to directly open the file in an editor of your choice.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your editor is already open this may not work, because the other
+process will shortly communicate with the existent process and
+return immediately. coala handles this for some editors
+automatically, if yours does not work yet - please file an issue so we
+can include it!</p>
+</div>
+<p>If you changed one file in multiple results, coala will merge the
+changes if this is possible.</p>
+<p>coala should have appended something like this to your <code class="docutils literal"><span class="pre">.coafile</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Makefiles</span><span class="p">]</span>
+<span class="n">bears</span> <span class="o">=</span> <span class="n">LineLengthBear</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">Makefile</span>
+</pre></div>
+</div>
+<p>As you see, sections provide a way to have different configurations for
+possibly different languages in one file. They are executed
+sequentially.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a list of configuration options for the bears, take a look at our
+<a class="reference external" href="https://github.com/coala/bear-docs">bear-docs</a> documentation.</p>
+</div>
+</div>
+<div class="section" id="auto-applying-results">
+<h2>Auto-applying Results<a class="headerlink" href="#auto-applying-results" title="Permalink to this headline">¶</a></h2>
+<p>Often you don&#8217;t want to look at trivial results like spacing issues. For
+that purpose coala includes a special setting called <code class="docutils literal"><span class="pre">default_actions</span></code>
+that allows you to set the action for a bear that shall be automatically
+applied on run. We have a command line alias <code class="docutils literal"><span class="pre">--apply-patches</span></code> to make it
+easier to use.</p>
+<p>Let&#8217;s automatically fix Python code. Take a look at our sample Python
+code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cat src/add.py
+
+&quot;&quot;&quot;
+This is a simple library that provides a function that can add numbers.
+
+Cheers!
+&quot;&quot;&quot;
+
+
+
+def add(a,b):
+    return a+b;
+
+import sys
+</pre></div>
+</div>
+<p>That looks horrible, doesn&#8217;t it? Let&#8217;s fix it!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ coala -S python.bears=PEP8Bear python.files=\*\*/\*.py \
+--apply-patches --save
+# other output ...
+Executing section python...
+[INFO][11:03:37] Applied &#39;ApplyPatchAction&#39; for &#39;PEP8Bear&#39;.
+[INFO][11:03:37] Applied &#39;ApplyPatchAction&#39; for &#39;PEP8Bear&#39;.
+</pre></div>
+</div>
+<p>coala would now fix all spacing issues and without bothering you again.</p>
+</div>
+<div class="section" id="setting-inheritance">
+<h2>Setting Inheritance<a class="headerlink" href="#setting-inheritance" title="Permalink to this headline">¶</a></h2>
+<p>All settings in the default section are implicitly inherited to all
+other sections (if they do not override their values). We can use that
+to save a few lines!</p>
+<p>Lets add the following section to our <code class="docutils literal"><span class="pre">.coafile</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">TODOS</span><span class="p">]</span>
+<span class="n">bears</span> <span class="o">=</span> <span class="n">KeywordBear</span>
+</pre></div>
+</div>
+<p>And execute <code class="docutils literal"><span class="pre">coala</span></code> with the <code class="docutils literal"><span class="pre">-s</span></code> argument which is the same as
+<code class="docutils literal"><span class="pre">--save</span></code>. I recommend setting case insensitive keywords to
+<code class="docutils literal"><span class="pre">TODO,</span> <span class="pre">FIXME</span></code> and case sensitive keywords empty.</p>
+<p>After the results we&#8217;ve already seen, we&#8217;ll see a new informational one
+which informs us that we have a TODO in our code.</p>
+<p>Did you note that we didn&#8217;t specify which files to check this time? This
+is because all settings, including <code class="docutils literal"><span class="pre">files</span> <span class="pre">=</span> <span class="pre">src/*.c</span></code>, from the Default
+section are already available in every other section implicitly. Thus
+the default section is a good point to set things like logging and
+output settings or specifying a default set of files to check.</p>
+</div>
+<div class="section" id="ignoring-issues">
+<h2>Ignoring Issues<a class="headerlink" href="#ignoring-issues" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to ignore certain issues, so you aren&#8217;t lost if
+any routines yield false positives.</p>
+<div class="section" id="ignoring-files">
+<h3>Ignoring Files<a class="headerlink" href="#ignoring-files" title="Permalink to this headline">¶</a></h3>
+<p>coala lets you ignore whole files through the <code class="docutils literal"><span class="pre">ignore</span></code> setting. In
+addition to normal globs, coala offers <code class="docutils literal"><span class="pre">**</span></code> to match all directories and
+subdirectories:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="o">**/*.</span><span class="n">h</span>
+<span class="n">ignore</span> <span class="o">=</span> <span class="o">**/</span><span class="n">resources</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>This configuration would include all header (<code class="docutils literal"><span class="pre">.h</span></code>) files but leaves
+out resource headers.</p>
+</div>
+<div class="section" id="ignoring-code-inside-files">
+<h3>Ignoring Code Inside Files<a class="headerlink" href="#ignoring-code-inside-files" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you need finer-graded ignores. Imagine you have a
+<code class="docutils literal"><span class="pre">LineLengthBear</span></code> that shall not run on some code segments, because you
+can&#8217;t wrap them:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;that&#39;s checked normally&quot;</span>
+
+<span class="c1"># Ignore LineLengthBear</span>
+<span class="n">unwrappable_string</span> <span class="o">=</span> <span class="s2">&quot;some string that is long and would exceed the limit&quot;</span>
+</pre></div>
+</div>
+<p>You can also skip an area:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Start ignoring LineLengthBear</span>
+<span class="n">unwrappable_string_2</span> <span class="o">=</span> <span class="n">unwrappable_string</span> <span class="o">+</span> <span class="s2">&quot;yeah it goes even further...&quot;</span>
+<span class="n">another_unwrappable_string</span> <span class="o">=</span> <span class="n">unwrappable_string</span> <span class="o">+</span> <span class="n">unwrappable_string_2</span>
+<span class="c1"># Stop ignoring</span>
+</pre></div>
+</div>
+<p>You can also conditionally combine ignore rules! Bear names will be
+split by comma and spaces, invalid bear names like <code class="docutils literal"><span class="pre">and</span></code> will be
+ignored.</p>
+<p>Also note that in the bear names delimited by commas and spaces, you may
+specify glob wildcards that match several bears:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Start ignoring Line*, Py*</span>
+<span class="n">unwrappable_string_2</span> <span class="o">=</span> <span class="n">unwrappable_string</span> <span class="o">+</span> <span class="s2">&quot;yeah it goes even further...&quot;</span>
+<span class="n">another_unwrappable_string</span> <span class="o">=</span> <span class="n">unwrappable_string</span> <span class="o">+</span> <span class="n">unwrappable_string_2</span>
+<span class="c1"># Stop ignoring</span>
+</pre></div>
+</div>
+<p>In the above example all bears matching the glob <cite>Line*</cite> and <cite>Py*</cite> will
+be ignored. You may also specify more complex globs here such as
+<cite># Start ignoring (Line*|P[yx]*)</cite> which will ignore all bears&#8217; names which
+start with <cite>Line</cite>, <cite>Py</cite>, and <cite>Px</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Ignore LineLengthBear and SpaceConsistencyBear</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="s2">&quot;Why the heck are spaces used instead of tabs...&quot;</span> <span class="o">+</span> <span class="s2">&quot;so_long&quot;</span>
+</pre></div>
+</div>
+<p>If you put an <code class="docutils literal"><span class="pre">all</span></code> instead of the bear names directly after the
+<code class="docutils literal"><span class="pre">ignore</span></code>/<code class="docutils literal"><span class="pre">ignoring</span></code> keyword, the results of all bears affecting
+those lines will be ignored.</p>
+<p>If you&#8217;ve used another linter in the past, you don&#8217;t have to change your
+pre-existing code with the <code class="docutils literal"><span class="pre">noqa</span></code> keywords to <code class="docutils literal"><span class="pre">ignore</span></code> as the examples
+below work as well. If no bears are specified, <code class="docutils literal"><span class="pre">noqa</span></code> will be applicable to
+work for all bears.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># noqa</span>
+<span class="n">long_line</span> <span class="o">=</span> <span class="s2">&quot;This is a long line ... &quot;</span>
+</pre></div>
+</div>
+<p>If you wish to specify which bear to use with <code class="docutils literal"><span class="pre">noqa</span></code>, as is done
+with <code class="docutils literal"><span class="pre">ignore</span></code>, you would have to proceed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># noqa LineLengthBear</span>
+<span class="n">long_line</span> <span class="o">=</span> <span class="s2">&quot;This is a long line ... &quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="enabling-disabling-sections">
+<h2>Enabling/Disabling Sections<a class="headerlink" href="#enabling-disabling-sections" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have sections we need some way to control, which sections
+are executed. coala provides two ways to do that:</p>
+<div class="section" id="manual-enabling-disabling">
+<h3>Manual Enabling/Disabling<a class="headerlink" href="#manual-enabling-disabling" title="Permalink to this headline">¶</a></h3>
+<p>If you add the line <code class="docutils literal"><span class="pre">TODOS.enabled=False</span></code> to some arbitrary place to
+your <code class="docutils literal"><span class="pre">.coafile</span></code> or just <code class="docutils literal"><span class="pre">enabled=False</span></code> into the <code class="docutils literal"><span class="pre">TODOS</span></code> section,
+coala will not show the TODOs on every run.</p>
+<p>Especially for those bears yielding informational messages which you
+might want to see from time to time this is a good way to silence them.</p>
+</div>
+<div class="section" id="specifying-targets">
+<h3>Specifying Targets<a class="headerlink" href="#specifying-targets" title="Permalink to this headline">¶</a></h3>
+<p>If you provide positional arguments, like <code class="docutils literal"><span class="pre">coala</span> <span class="pre">Makefiles</span></code>, coala
+will execute exclusively those sections that are specified. This will
+not get stored in your <code class="docutils literal"><span class="pre">.coafile</span></code> and will take precedence over all
+enabled settings. You can specify several targets separated by a space.</p>
+<p>What was that TODO again?</p>
+</div>
+</div>
+<div class="section" id="continuing-the-journey">
+<h2>Continuing the Journey<a class="headerlink" href="#continuing-the-journey" title="Permalink to this headline">¶</a></h2>
+<p>If you want to know about more options, take a look at our <a class="reference external" href="https://coala.io/help">coala settings</a> documentation or with
+<code class="docutils literal"><span class="pre">coala</span> <span class="pre">-h</span></code>. If you liked or disliked this tutorial, feel free to drop
+us a note at our <a class="reference external" href="https://github.com/coala/coala/issues">bug tracker</a> or <a class="reference external" href="https://groups.google.com/forum/#!forum/coala-devel">mailing list</a>.</p>
+<p>If you need more flexibility, know that coala is extensible in many ways
+due to its modular design:</p>
+<ul class="simple">
+<li>If you want to write your own bears, take a look at
+<a class="reference external" href="http://coala.io/writingbears">our tutorial</a>.</li>
+<li>If you want to add custom actions for results, take a look at the
+code in <a class="reference external" href="https://github.com/coala/coala/tree/master/coalib/results/result_actions">coalib/results/results_actions</a>.</li>
+<li>If you want to have some custom outputs (e.g. HTML pages, a GUI or
+voice interaction) take a look at modules lying in <a class="reference external" href="https://github.com/coala/coala/tree/master/coalib/output">coalib/output</a>.</li>
+</ul>
+<p>Happy coding!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started with coala</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-some-code">Get Some Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#let-s-start">Let&#8217;s Start!</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-interface">Command Line Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-files-coafiles">Configuration Files - coafiles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sections">Sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#auto-applying-results">Auto-applying Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-inheritance">Setting Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ignoring-issues">Ignoring Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ignoring-files">Ignoring Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ignoring-code-inside-files">Ignoring Code Inside Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-disabling-sections">Enabling/Disabling Sections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manual-enabling-disabling">Manual Enabling/Disabling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-targets">Specifying Targets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#continuing-the-journey">Continuing the Journey</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Install.html" title="previous chapter">Installing coala Natively</a></li>
+      <li>Next: <a href="coafile.html" title="next chapter">Writing a coala Configuration File (coafile and coarc)</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/Tutorial.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

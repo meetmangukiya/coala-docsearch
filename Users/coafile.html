@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing a coala Configuration File (coafile and coarc) &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Glob - Extended unix style pathname expansion" href="Glob_Patterns.html" />
+    <link rel="prev" title="Getting Started with coala" href="Tutorial.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="writing-a-coala-configuration-file-coafile-and-coarc">
+<h1>Writing a coala Configuration File (coafile and coarc)<a class="headerlink" href="#writing-a-coala-configuration-file-coafile-and-coarc" title="Permalink to this headline">¶</a></h1>
+<p>This document gives a short introduction to the specification of a
+coala configuration file. It is meant to be rather factual. If you wish
+to learn by example, please take a look at the <a class="reference internal" href="Tutorial.html"><span class="doc">Getting Started with coala</span></a>.</p>
+<div class="section" id="naming-scope-and-location">
+<h2>Naming, Scope and Location<a class="headerlink" href="#naming-scope-and-location" title="Permalink to this headline">¶</a></h2>
+<p>You can use up to three coafiles to configure your project.</p>
+<ol class="arabic simple">
+<li>A project-wide coafile.</li>
+<li>A user-wide coafile.</li>
+<li>A system-wide coafile.</li>
+</ol>
+<div class="section" id="project-wide-coafile">
+<h3>Project-Wide coafile<a class="headerlink" href="#project-wide-coafile" title="Permalink to this headline">¶</a></h3>
+<p>It is a convention that the project-wide coafile is named <code class="docutils literal"><span class="pre">.coafile</span></code>
+and lies in the project root directory. If you follow this convention,
+simply executing <code class="docutils literal"><span class="pre">coala</span></code> from the project root will execute the
+configuration specified in that file.</p>
+<p>Settings given in the project-wide coafile override all settings given
+by other files and can only be overridden by settings given via the
+command line interface.</p>
+</div>
+<div class="section" id="user-wide-and-system-wide-coafile">
+<h3>User-Wide and System-Wide coafile<a class="headerlink" href="#user-wide-and-system-wide-coafile" title="Permalink to this headline">¶</a></h3>
+<p>You can place a <code class="docutils literal"><span class="pre">.coarc</span></code> file in your home directory to set certain
+user wide settings. Those settings will automatically be taken for all
+projects executed with that user.</p>
+<p>All settings specified here override only settings given by the system
+wide coafile which has the lowest priority. The <code class="docutils literal"><span class="pre">default_coafile</span></code> must
+lie in the coala installation directory and is valid for everyone using
+this coala installation.</p>
+</div>
+</div>
+<div class="section" id="explicit-setting-inheritance">
+<h2>Explicit Setting Inheritance<a class="headerlink" href="#explicit-setting-inheritance" title="Permalink to this headline">¶</a></h2>
+<p>Every coafile contains one or more sections. Section names are case
+insensitive. The old(pre 0.11.x) implicit section inheritance syntax
+has been deprecated and has been scheduled for removal in coala version 0.12.0.
+Instead, define section inheritance explicitly by naming a section in the
+format <code class="docutils literal"><span class="pre">[basesection.newsection]</span></code>. Extra values can be appended to an
+inherited setting using the <code class="docutils literal"><span class="pre">+=</span></code> operator.</p>
+<p>Consider the following coafile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ignore</span> <span class="o">=</span> <span class="n">vendor1</span><span class="o">/</span>
+
+<span class="p">[</span><span class="nb">all</span><span class="o">.</span><span class="n">section1</span><span class="p">]</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">ignore</span> <span class="o">+=</span> <span class="n">vendor2</span><span class="o">/</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">some_value</span>
+
+<span class="p">[</span><span class="nb">all</span><span class="o">.</span><span class="n">section2</span><span class="p">]</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">ignore</span> <span class="o">+=</span> <span class="n">vendor3</span><span class="o">/</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">some_other_value</span>
+</pre></div>
+</div>
+<p>This is the same file without section inheritance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ignore</span> <span class="o">=</span> <span class="n">vendor1</span><span class="o">/</span>
+
+<span class="p">[</span><span class="n">section1</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">ignore</span> <span class="o">=</span> <span class="n">vendor1</span><span class="o">/</span><span class="p">,</span> <span class="n">vendor2</span><span class="o">/</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">some_value</span>
+
+<span class="p">[</span><span class="n">section2</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">overridable</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">ignore</span> <span class="o">=</span> <span class="n">vendor1</span><span class="o">/</span><span class="p">,</span> <span class="n">vendor3</span><span class="o">/</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">some_other_value</span>
+</pre></div>
+</div>
+<p>All settings must be part of a section, so don&#8217;t do this for implicit
+inheritance (this is also deprecated behavior):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># bad!</span>
+<span class="n">setting1</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="p">[</span><span class="n">section1</span><span class="p">]</span>
+<span class="c1"># setting1 is inherited</span>
+<span class="n">setting2</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Instead, make the inheritance explicit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># better!</span>
+<span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+<span class="n">setting1</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="p">[</span><span class="nb">all</span><span class="o">.</span><span class="n">section1</span><span class="p">]</span>
+<span class="c1"># setting1 is inherited</span>
+<span class="n">setting2</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="section" id="comments-escaping-and-multiline-values-and-keys">
+<h3>Comments, Escaping and Multiline Values and Keys<a class="headerlink" href="#comments-escaping-and-multiline-values-and-keys" title="Permalink to this headline">¶</a></h3>
+<p>Comments are simply done with a preceding <code class="docutils literal"><span class="pre">#</span></code>. If you want to use a
+<code class="docutils literal"><span class="pre">#</span></code> within a value, you can simply escape it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a_key</span> <span class="o">=</span> <span class="n">a</span>\<span class="c1">#value # And a comment at the end!</span>
+</pre></div>
+</div>
+<p>Any line not containing an unescaped <code class="docutils literal"><span class="pre">=</span></code> is simply appended to the
+value of the last key:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>a_key = a
+value
+# this is not part of the value
+that /= is
+very long!
+</pre></div>
+</div>
+<p>Similarly, you can also set a value to multiple keys:
+<code class="docutils literal"><span class="pre">key_1,</span> <span class="pre">key_2</span> <span class="pre">=</span> <span class="pre">value</span></code> is equivalent to <code class="docutils literal"><span class="pre">key_1</span> <span class="pre">=</span> <span class="pre">value</span></code> and
+<code class="docutils literal"><span class="pre">key_2</span> <span class="pre">=</span> <span class="pre">value</span></code> in separate lines.</p>
+<p>As the backslash is the escape character it is recommended to use
+forward slashes as path separator even on Windows (to keep relative
+paths platform independent), use double-backslashes if you really mean a
+backslash in all places.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing a coala Configuration File (coafile and coarc)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#naming-scope-and-location">Naming, Scope and Location</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-wide-coafile">Project-Wide coafile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-wide-and-system-wide-coafile">User-Wide and System-Wide coafile</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#explicit-setting-inheritance">Explicit Setting Inheritance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comments-escaping-and-multiline-values-and-keys">Comments, Escaping and Multiline Values and Keys</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Tutorial.html" title="previous chapter">Getting Started with coala</a></li>
+      <li>Next: <a href="Glob_Patterns.html" title="next chapter">Glob - Extended unix style pathname expansion</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/coafile.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

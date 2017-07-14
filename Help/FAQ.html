@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frequently Asked Questions &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="prev" title="Getting In Touch With Us" href="Getting_In_Touch.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1><a class="toc-backref" href="#id2">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<p>This is a list of frequently asked questions, aiming to answer any possible
+questions by newcomers or even contributors.</p>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#frequently-asked-questions" id="id2">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#what-does-coala-do-for-me" id="id3">What does coala do (for me)?</a></li>
+<li><a class="reference internal" href="#can-i-use-coala-in-my-continuous-integration" id="id4">Can I Use coala in my Continuous Integration?</a></li>
+<li><a class="reference internal" href="#why-did-you-choose-the-name" id="id5">Why did you choose the name?</a></li>
+<li><a class="reference internal" href="#is-there-corporate-backing-behind-coala-what-are-your-intentions" id="id6">Is there corporate backing behind coala? What are your intentions?</a></li>
+<li><a class="reference internal" href="#what-sort-of-analysis-does-coala-do-what-languages-are-supported" id="id7">What sort of analysis does coala do? What languages are supported?</a></li>
+<li><a class="reference internal" href="#how-do-i-get-started-with-coala" id="id8">How do I get started with coala?</a></li>
+<li><a class="reference internal" href="#how-do-i-get-in-touch-with-the-coala-team" id="id9">How do I get in touch with the coala team?</a></li>
+<li><a class="reference internal" href="#installation-is-failing-help" id="id10">Installation is Failing! Help!</a></li>
+<li><a class="reference internal" href="#what-are-those-things-failing-passing-on-my-pull-request" id="id11">What are those things failing/passing on my Pull Request?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-does-coala-do-for-me">
+<h2><a class="toc-backref" href="#id3">What does coala do (for me)?</a><a class="headerlink" href="#what-does-coala-do-for-me" title="Permalink to this headline">¶</a></h2>
+<p>coala is like a spell and grammar checker for source code. It offers one
+command and one configuration to lint all languages in your project.</p>
+<p>In short coala does two things:</p>
+<ul class="simple">
+<li>Makes it easy to use existing static code analyzers such as clang,
+pylint(and many others) by unifying and simplifying the configs</li>
+<li>Makes it easy to write new routines by offering the interface part and
+everything but the actual analyzer routine. Write just the parameters
+your custom analysis needs and the analysis part, we&#8217;ll take care of the rest</li>
+</ul>
+</div>
+<div class="section" id="can-i-use-coala-in-my-continuous-integration">
+<h2><a class="toc-backref" href="#id4">Can I Use coala in my Continuous Integration?</a><a class="headerlink" href="#can-i-use-coala-in-my-continuous-integration" title="Permalink to this headline">¶</a></h2>
+<p>Yes! There&#8217;s an argument <em>&#8211;ci</em> that runs the coala binary in non-interactive
+mode, which shows results cleanly in the log and returns error codes
+if something goes wrong. List of the exit codes and their meanings:
+<a class="reference external" href="https://docs.coala.io/en/latest/Users/Exit_Codes.html">Exit Codes</a>.</p>
+</div>
+<div class="section" id="why-did-you-choose-the-name">
+<h2><a class="toc-backref" href="#id5">Why did you choose the name?</a><a class="headerlink" href="#why-did-you-choose-the-name" title="Permalink to this headline">¶</a></h2>
+<p>coala stands for &#8220;COde AnaLysis Application&#8221;, works well with animals and thus
+is well visualizable, it&#8217;s easy to memorize.</p>
+</div>
+<div class="section" id="is-there-corporate-backing-behind-coala-what-are-your-intentions">
+<h2><a class="toc-backref" href="#id6">Is there corporate backing behind coala? What are your intentions?</a><a class="headerlink" href="#is-there-corporate-backing-behind-coala-what-are-your-intentions" title="Permalink to this headline">¶</a></h2>
+<p>coala was founded for fun. coala was, is and will always be free software and
+is developed mostly by students and there&#8217;s no corporate interest and no CLA.
+If you want to back us, contact us on our
+<a class="reference external" href="https://coala.io/chat">gitter channel</a>.</p>
+</div>
+<div class="section" id="what-sort-of-analysis-does-coala-do-what-languages-are-supported">
+<h2><a class="toc-backref" href="#id7">What sort of analysis does coala do? What languages are supported?</a><a class="headerlink" href="#what-sort-of-analysis-does-coala-do-what-languages-are-supported" title="Permalink to this headline">¶</a></h2>
+<p>A list of all analysis routines and supported languages is
+<a class="reference external" href="https://github.com/coala/bear-docs/blob/master/README.rst#supported-languages">here</a>
+- fully browsable.</p>
+<p>For a top level view on what languages support what kind of analysis roughly,
+consult <a class="reference external" href="https://docs.google.com/spreadsheets/d/1bm63TQHndmGf3HQ33fp9UEmGKNYI7dTkjMyFIof2PqA/edit?usp=sharing">this link</a>.</p>
+<p>There are also generic bears, which can be applied language independently on
+your code. Their capabilities and information can be seen
+<a class="reference external" href="https://github.com/coala/bear-docs/blob/master/README.rst#all">here</a>.</p>
+</div>
+<div class="section" id="how-do-i-get-started-with-coala">
+<h2><a class="toc-backref" href="#id8">How do I get started with coala?</a><a class="headerlink" href="#how-do-i-get-started-with-coala" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re looking to get started using coala, we have a full tutorial
+<a class="reference internal" href="../Users/Tutorial.html"><span class="doc">here</span></a>
+that will teach you everything you need to know to use coala.</p>
+<p>If you&#8217;re willing to contribute and become a part of our coalaian community,
+we have written a guide that will help you fix an issue on your own, just by
+following and understanding the indications
+<a class="reference external" href="http://coala.io/newcomer">here</a>.
+It is meant for newcomers, and it does not require you to have any precedent
+knowledge regarding coala.</p>
+</div>
+<div class="section" id="how-do-i-get-in-touch-with-the-coala-team">
+<h2><a class="toc-backref" href="#id9">How do I get in touch with the coala team?</a><a class="headerlink" href="#how-do-i-get-in-touch-with-the-coala-team" title="Permalink to this headline">¶</a></h2>
+<p>We are very active on our
+<a class="reference external" href="https://coala.io/chat">gitter channel</a>
+and will try to respond to any question in a matter of minutes.
+However, for a full list of how to get in touch with us, consult
+<a class="reference internal" href="Getting_In_Touch.html"><span class="doc">this link</span></a>.</p>
+</div>
+<div class="section" id="installation-is-failing-help">
+<h2><a class="toc-backref" href="#id10">Installation is Failing! Help!</a><a class="headerlink" href="#installation-is-failing-help" title="Permalink to this headline">¶</a></h2>
+<p>Don&#8217;t panic!</p>
+<p>Scroll down the error log, you will probably see something like <cite>ValueError:
+(&#8216;Expected version spec in&#8217;, &#8216;appdirs ~=1.4.0&#8217;, &#8216;at&#8217;, &#8216; ~=1.4.0&#8217;)</cite> there.
+If not, <a class="reference external" href="coala.io/chat">ask us!</a></p>
+<p>If so, you&#8217;re probably on a Debian with an outdated pip that doesn&#8217;t support
+our version specifiers yet. You have to create a virtual environment with
+a newer pip:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip3 install virtualenv
+virtualenv -p python3 ~/venvs/coala
+. ~/venvs/coala/bin/activate
+pip install -U pip
+pip install coala-bears
+</pre></div>
+</div>
+<p>should do the job. You have to activate this virtualenv on every terminal
+session you want to use coala though (tip: add it to bashrc!)</p>
+</div>
+<div class="section" id="what-are-those-things-failing-passing-on-my-pull-request">
+<h2><a class="toc-backref" href="#id11">What are those things failing/passing on my Pull Request?</a><a class="headerlink" href="#what-are-those-things-failing-passing-on-my-pull-request" title="Permalink to this headline">¶</a></h2>
+<p>We use a few checks to make sure your Pull Request is ready to be merged into
+our master branch. Right now we use 7 of those checks:</p>
+<ul class="simple">
+<li><strong>review/gitmate/commit</strong> Checks this particular commit has any new gitmate
+issues.</li>
+<li><strong>review/gitmate/pr</strong> Checks whether your code respects our styling (PEP8),
+doesn&#8217;t contain unneeded newlines, trailing whitespace, etc. Basically it is
+like running coala over your code, so to fix this, simply run <code class="docutils literal"><span class="pre">$</span> <span class="pre">coala</span></code>
+before pushing! In case you have multiple commits, and the issue is in one
+of them, the status will still be failed, so be careful to run <code class="docutils literal"><span class="pre">$</span> <span class="pre">coala</span></code>
+before making each commit.</li>
+<li><strong>review/gitmate/manual</strong> This one is the only one that is manual, this can
+be given by any coala member and shows that the commit has been reviewed and
+has no problems, so it is ready to be merged. It can be done by commenting
+<code class="docutils literal"><span class="pre">ack</span> <span class="pre">commit_sha</span></code>. For more information about the whole process, we have
+it all documented
+<a class="reference external" href="http://api.coala.io/en/latest/Developers/Review.html">here</a>.</li>
+<li><strong>codecov/project</strong> This one checks whether all your code is being tested. We
+cannot merge anything that may not work or may broke somewhere, so to avoid
+obvious bugs we use this. To fix it, write doctests or unittests for your
+functions / classes.</li>
+<li><strong>ci/circleCI</strong> This is one of the two containers we use to continuously
+test the code. It basically runs all the tests and checks your code in a
+container, checking that the tests pass on the container. This one is for
+Linux, it runs Ubuntu 12.04.</li>
+<li><strong>continuous-integration/appveyor/pr</strong> This one does the same as the one
+above, but for Windows, both 32 and 64bits versions.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Users/Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-does-coala-do-for-me">What does coala do (for me)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-i-use-coala-in-my-continuous-integration">Can I Use coala in my Continuous Integration?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-did-you-choose-the-name">Why did you choose the name?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-there-corporate-backing-behind-coala-what-are-your-intentions">Is there corporate backing behind coala? What are your intentions?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-sort-of-analysis-does-coala-do-what-languages-are-supported">What sort of analysis does coala do? What languages are supported?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-get-started-with-coala">How do I get started with coala?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-get-in-touch-with-the-coala-team">How do I get in touch with the coala team?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-is-failing-help">Installation is Failing! Help!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-are-those-things-failing-passing-on-my-pull-request">What are those things failing/passing on my Pull Request?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Getting_In_Touch.html" title="previous chapter">Getting In Touch With Us</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Help/FAQ.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Coverage Installation Hints for macOS Users: &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Getting In Touch With Us" href="Getting_In_Touch.html" />
+    <link rel="prev" title="coala as a Docker Image" href="../Users/Docker_Image.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="coverage-installation-hints-for-macos-users">
+<h1>Coverage Installation Hints for macOS Users:<a class="headerlink" href="#coverage-installation-hints-for-macos-users" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="make-sure-you-have-installed-xcode-and-homebrew">
+<h2>1. Make sure you have installed Xcode and Homebrew.<a class="headerlink" href="#make-sure-you-have-installed-xcode-and-homebrew" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="install-python3">
+<h2>2. Install Python3.<a class="headerlink" href="#install-python3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ brew search python  # This should display python3
+$ brew install python3
+$ python3 --version   # To check the installed version
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-virtual-environments-with-pyvenv">
+<h2>3. Create Virtual Environments with pyvenv<a class="headerlink" href="#create-virtual-environments-with-pyvenv" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Create Virtual Env named myenv
+$ pyvenv myenv
+
+# This will create a folder named myenv in the
+# current directory. To activate this environment just type
+$ source myenv/bin/activate
+
+# You can start Python3 by typing:
+$ python
+</pre></div>
+</div>
+</div>
+<div class="section" id="virtualenvwrapper-with-python-3">
+<h2>4. Virtualenvwrapper with Python 3:<a class="headerlink" href="#virtualenvwrapper-with-python-3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Installation
+$ pip3 install virtualenv
+$ pip3 install virtualenvwrapper
+
+# Folder to contain Virtual Environments
+$ mkdir ~/.virtualenvs
+
+# Add the following in ~/.bash_profile
+$ export WORKON_HOME=~/.virtualenvs
+$ source /usr/local/bin/virtualenvwrapper.sh
+
+# Activate Changes
+$ source ~/.bash_profile
+
+# Get Python3 path (python3_pth)
+$ which python3
+
+# Create a new virtual environment with Python3
+$ mkvirtualenv --python=python3_path myenv
+</pre></div>
+</div>
+</div>
+<div class="section" id="finally">
+<h2>Finally!<a class="headerlink" href="#finally" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Install python-coverage3 by
+$ easy_install coverage
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Users/Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Users/Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MAC Hints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#make-sure-you-have-installed-xcode-and-homebrew">1. Make sure you have installed Xcode and Homebrew.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-python3">2. Install Python3.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-virtual-environments-with-pyvenv">3. Create Virtual Environments with pyvenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtualenvwrapper-with-python-3">4. Virtualenvwrapper with Python 3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finally">Finally!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../Users/Docker_Image.html" title="previous chapter">coala as a Docker Image</a></li>
+      <li>Next: <a href="Getting_In_Touch.html" title="next chapter">Getting In Touch With Us</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Help/MAC_Hints.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

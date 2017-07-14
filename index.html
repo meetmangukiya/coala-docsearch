@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="coala provides a common command-line interface for linting and fixing all your code, regardless of the programming languages you use." name="description" />
+<meta content="coala, code analysis, static code analysis, linter, language agnostic, python3, linux, unix, windows, bears, coala-bears" name="keywords" />
+
+    <title>Welcome to the coala documentation! &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="#" />
+    <link rel="next" title="Installing coala Natively" href="Users/Install.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-the-coala-documentation">
+<h1>Welcome to the coala documentation!<a class="headerlink" href="#welcome-to-the-coala-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<p>You might also want to look at <a class="reference external" href="http://coala.io/">our website</a>.</p>
+<a class="reference internal image-reference" href="_static/images/coala-header.png"><img alt="_static/images/coala-header.png" class="align-center" src="_static/images/coala-header.png" /></a>
+<div class="section" id="coala-language-independent-code-analysis">
+<h2>coala: Language Independent Code Analysis<a class="headerlink" href="#coala-language-independent-code-analysis" title="Permalink to this headline">¶</a></h2>
+<p><strong>coala provides a unified command-line interface for linting and fixing all
+your code, regardless of the programming languages you use.</strong></p>
+<p>With coala, users can create
+<a class="reference internal" href="Users/coafile.html"><span class="doc">rules and standards</span></a> to be followed in the source
+code. coala has an <strong>user-friendly interface</strong> that is completely customizable.
+It can be used in any environment and is completely modular.</p>
+<p>coala has a set of official bears (plugins) for several languages, including
+popular languages such as <strong>C/C++</strong>, <strong>Python</strong>, <strong>JavaScript</strong>, <strong>CSS</strong>,
+<strong>Java</strong> and many more, in addition to some generic language independent
+algorithms. To learn more about the different languages supported and the
+bears themselves,
+<a class="reference external" href="https://github.com/coala/bear-docs/blob/master/README.rst">click here.</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To see what coala can do for you and your language, take a look at
+<a class="reference external" href="https://github.com/coala/bear-docs/blob/master/README.rst">our capabilities listing</a>.</p>
+</div>
+<p>If you are here to use coala for your own projects, take a look at our
+<a class="reference internal" href="Users/Install.html"><span class="doc">installation guide</span></a>.</p>
+<p>If you want to start contributing to coala, you can follow our
+<a class="reference external" href="https://coala.io/newcomers">tutorial for newcomers</a> which aims to get
+everyone to fix an issue by themselves.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To contact us, always feel free to check our
+<a class="reference internal" href="Help/Getting_In_Touch.html"><span class="doc">Getting In Touch</span></a> page.</p>
+</div>
+</div>
+<div class="section" id="what-do-i-get">
+<h2>What do I get?<a class="headerlink" href="#what-do-i-get" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="as-a-user">
+<h3>As a User<a class="headerlink" href="#as-a-user" title="Permalink to this headline">¶</a></h3>
+<p>coala allows you to simply check your code against certain quality
+requirements. The checking routines are named <strong>Bears</strong> in coala. You
+can easily define a simple project file to check your project with all
+bears either shipped with coala or ones you found in the internet and
+trust.</p>
+</div>
+<div class="section" id="as-a-developer">
+<h3>As a Developer<a class="headerlink" href="#as-a-developer" title="Permalink to this headline">¶</a></h3>
+<p>If you are not satisfied with the functionality given by the bears we
+provide, you can easily write your own bears. coala is written with easiness
+of extension in mind. That means: no big boilerplate, just write one
+small object with one routine, add the parameters you like and see how
+coala automates the organization of settings, user interaction and
+execution parallelization. You shouldn&#8217;t need to care about anything
+else than just writing your algorithm!</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check out <a class="reference external" href="https://coala.io/writingbears">Writing Bears</a> for more
+information on this.</p>
+</div>
+<p>To programmatically access coala&#8217;s functionality, use the <code class="docutils literal"><span class="pre">--json</span></code> option.
+Use the <code class="docutils literal"><span class="pre">--format</span></code> option if you want to use a custom format string. Both of
+these arguments along with <code class="docutils literal"><span class="pre">--ci</span></code> argument run coala in non-interactive mode
+which is suitable for continuous integration.</p>
+</div>
+<div class="section" id="hint">
+<h3>Hint<a class="headerlink" href="#hint" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--json</span></code> makes the coala output easy to read and understand. It consists of
+a collection of name/value pairs usually represented by objects and an ordered
+list of values stored in arrays. You can read more about this format <a class="reference external" href="http://www.json.org">here</a>.</p>
+<p><code class="docutils literal"><span class="pre">--format</span></code> has a linear, one line return. Its output can be easily parsed
+as it is fully customizable. This option will not show all the tested areas
+but those with issues. In case of no errors, <code class="docutils literal"><span class="pre">--format</span></code> will have no output.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check <span class="xref doc">External APIs</span> for more information.</p>
+</div>
+</div>
+</div>
+<div class="section" id="status-and-stability-of-the-project">
+<h2>Status and Stability of the Project<a class="headerlink" href="#status-and-stability-of-the-project" title="Permalink to this headline">¶</a></h2>
+<p>We are currently working hard to make this project reality. coala is currently
+usable, in beta stage and already provides more features than most
+language dependent alternatives. Every single commit is fully reviewed and
+checked with various automated methods including our testsuite covering all
+branches. Our master branch is continuously prereleased to our users so you can
+rely on the upcoming release being rock stable.</p>
+<p>If you want to see how the development progresses, check out
+<a class="reference external" href="https://github.com/coala/coala">coala</a> and
+<a class="reference external" href="https://github.com/coala/coala-bears">coala-bears</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="#">
+    <img class="logo" src="_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Users/Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Users/Docker_Image.html">coala as a Docker Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="Users/Install.html" title="next chapter">Installing coala Natively</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

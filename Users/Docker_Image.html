@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>coala as a Docker Image &#8212; coala 0.8.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="coala 0.8.0 documentation" href="../index.html" />
+    <link rel="next" title="Coverage Installation Hints for macOS Users:" href="../Help/MAC_Hints.html" />
+    <link rel="prev" title="Shell Autocompletion" href="Shell_Autocompletion.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="coala-as-a-docker-image">
+<h1>coala as a Docker Image<a class="headerlink" href="#coala-as-a-docker-image" title="Permalink to this headline">¶</a></h1>
+<p>We provide a <code class="docutils literal"><span class="pre">coala/base</span></code> docker image for your convenience, that has
+dependencies for most official bears already installed.</p>
+<p>You can use the <code class="docutils literal"><span class="pre">coala/base</span></code> docker image to perform static code analysis
+on your code in the working directory, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>docker run -v=$(pwd):/app --workdir=/app coala/base coala --ci
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See also <a class="reference external" href="https://hub.docker.com/r/coala/base/">https://hub.docker.com/r/coala/base/</a>.</p>
+</div>
+<div class="section" id="coala-on-gitlab-ci">
+<h2>coala on GitLab CI<a class="headerlink" href="#coala-on-gitlab-ci" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <code class="docutils literal"><span class="pre">coala/base</span></code> docker image to perform static code analysis
+on your code with a <code class="docutils literal"><span class="pre">.gitlab-ci.yml</span></code>, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">check_code</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="n">coala</span><span class="o">/</span><span class="n">base</span>
+  <span class="n">script</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">-</span> <span class="n">coala</span> <span class="o">--</span><span class="n">ci</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about GitLab CI configuration, consult the
+<a class="reference external" href="https://docs.gitlab.com/ce/ci/">official documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting-gitlab-ci">
+<h2>Troubleshooting GitLab CI<a class="headerlink" href="#troubleshooting-gitlab-ci" title="Permalink to this headline">¶</a></h2>
+<p>You might experience DNS related difficulties with a private GitLab CI setup.
+The coala container might not be able to clone the repository if the GitLab
+server name is not resolvable.</p>
+<p>When this is the case, the most straightforward workaround is to add a
+configuration line inside the <code class="docutils literal"><span class="pre">config.toml</span></code>
+<a class="reference external" href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/configuration/advanced-configuration.md">configuration file</a>
+for the <code class="docutils literal"><span class="pre">gitlab-ci-multi-runner</span></code> runner:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">extra_hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my-gitlab.example.com:192.168.0.100&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Please be aware that the most generic <code class="docutils literal"><span class="pre">dns</span></code> setting listed in the
+<code class="docutils literal"><span class="pre">gitlab-ci-multi-runner</span></code> documentation has been recently added and at
+the time of this writing is not available in official builds.</p>
+</div>
+<div class="section" id="coala-on-travis-ci">
+<h2>coala on Travis CI<a class="headerlink" href="#coala-on-travis-ci" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <code class="docutils literal"><span class="pre">coala/base</span></code> docker image to perform static code analysis
+on your code with a <code class="docutils literal"><span class="pre">.travis.yml</span></code>, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>language: generic
+services: docker
+script: docker run -v=$(pwd):/app --workdir=/app coala/base coala --ci
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about Travis CI configuration, consult the
+<a class="reference external" href="https://docs.travis-ci.com/">official documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="coala-on-circle-ci">
+<h2>coala on Circle CI<a class="headerlink" href="#coala-on-circle-ci" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <code class="docutils literal"><span class="pre">coala/base</span></code> docker image to perform static code analysis
+on your code with a <code class="docutils literal"><span class="pre">circle.yml</span></code>, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>machine:
+  services:
+    - docker
+
+test:
+  override:
+    - docker run -v=$(pwd):/app --workdir=/app coala/base coala --ci
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about Circle CI configuration, consult the
+<a class="reference external" href="https://circleci.com/docs/">official documentation</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static//images/coala_logo.svg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">coala</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=coala&repo=coala&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+    <h3>Quick Search</h3>
+    <div><input type="text" name="q"/></div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+    $('#searchbox').show(0);
+    docsearch({
+        apiKey: '4332f80999581036b1bf34e7aa9a2940',
+        indexName: 'coala',
+        inputSelector: '#searchbox > div > input',
+        debug: false // Set debug to true if you want to inspect the dropdown
+        });
+</script><h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installing coala Natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html#using-coala-with-docker">Using coala With Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Getting Started with coala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coafile.html">Writing a coala Configuration File (coafile and coarc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glob_Patterns.html">Using Glob Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exit_Codes.html">Exit Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coala_as_Git_Hook.html">Adding coala as a Git Hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell_Autocompletion.html">Shell Autocompletion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">coala as a Docker Image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#coala-on-gitlab-ci">coala on GitLab CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting-gitlab-ci">Troubleshooting GitLab CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coala-on-travis-ci">coala on Travis CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coala-on-circle-ci">coala on Circle CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/MAC_Hints.html">MAC Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/Getting_In_Touch.html">How To Get In Touch With Us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Help/FAQ.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">For Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://api.coala.io">coala API Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Shell_Autocompletion.html" title="previous chapter">Shell Autocompletion</a></li>
+      <li>Next: <a href="../Help/MAC_Hints.html" title="next chapter">Coverage Installation Hints for macOS Users:</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, The coala Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Users/Docker_Image.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/coala/coala" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
